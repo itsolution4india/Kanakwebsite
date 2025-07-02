@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure--2(monv%onvl8e$bpa8dchwnxp$w5=f%vp(yam%@=uh#rc@7d=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'kanakform.live', 'www.kanakform.live']
 
 
 # Application definition
