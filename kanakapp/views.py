@@ -33,31 +33,38 @@ def landing_page(request):
 def register(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        email = request.POST.get('email')
         number = request.POST.get('number')
         location = request.POST.get('location')
+        service = request.POST.get('service')
         subscribe_sms = request.POST.get('subscribe_sms') == 'on'
         subscribe_email = request.POST.get('subscribe_email') == 'on'
         subscribe_voice = request.POST.get('subscribe_voice') == 'on'
-        
-        # Check if user already exists
+
+        # Check if number or email already exists
         if User.objects.filter(number=number).exists():
-            messages.error(request, 'User with this number already exists!')
+            messages.error(request, 'User with this mobile number already exists!')
             return render(request, 'register.html')
-        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'User with this email already exists!')
+            return render(request, 'register.html')
+
         # Generate OTP
         otp = generate_otp()
-        
+
         # Create user
         user = User.objects.create(
             name=name,
+            email=email,
             number=number,
             location=location,
+            service=service,
             subscribe_sms=subscribe_sms,
             subscribe_email=subscribe_email,
             subscribe_voice=subscribe_voice,
             otp=otp
         )
-        
+
         # Send OTP
         if send_sms(number, otp):
             request.session['user_id'] = user.id
@@ -65,9 +72,9 @@ def register(request):
             messages.success(request, 'OTP sent successfully!')
             return redirect('verify_otp')
         else:
-            messages.error(request, 'Failed to send OTP. Please try again.')
             user.delete()
-    
+            messages.error(request, 'Failed to send OTP. Please try again.')
+
     return render(request, 'register.html')
 
 def login_view(request):

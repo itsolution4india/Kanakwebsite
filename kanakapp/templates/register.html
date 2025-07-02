@@ -12,45 +12,80 @@
             <div class="card-body p-5">
                 <form method="post">
                     {% csrf_token %}
+                    
                     <div class="mb-4">
                         <label for="name" class="form-label">
                             <i class="fas fa-user me-1"></i>Full Name
                         </label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    
+
+                    <div class="mb-4">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope me-1"></i>Email
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
                     <div class="mb-4">
                         <label for="number" class="form-label">
                             <i class="fas fa-phone me-1"></i>Mobile Number
                         </label>
                         <input type="tel" class="form-control" id="number" name="number" 
-                               pattern="[0-9]{10}" title="Please enter 10 digit mobile number" required>
+                            pattern="[0-9]{10}" title="Please enter 10 digit mobile number" required>
                     </div>
-                    
+
                     <div class="mb-4">
                         <label for="location" class="form-label">
                             <i class="fas fa-map-marker-alt me-1"></i>Location
                         </label>
                         <input type="text" class="form-control" id="location" name="location" required>
                     </div>
-                    
+
+                    <div class="mb-4">
+                        <label for="service" class="form-label">
+                            <i class="fas fa-briefcase me-1"></i>Service Category
+                        </label>
+                        <select class="form-select" id="service" name="service" required>
+                            <option value="" selected disabled>Select a service</option>
+                            <option>Real Estate</option>
+                            <option>Ayurveda</option>
+                            <option>Credit Cards</option>
+                            <option>Banking</option>
+                            <option>Finance</option>
+                            <option>Insurance</option>
+                            <option>E-commerce</option>
+                            <option>Healthcare</option>
+                            <option>Education</option>
+                            <option>Travel</option>
+                            <option>Telecom</option>
+                            <option>Investment</option>
+                            <option>Stock Market</option>
+                            <option>Mutual Funds</option>
+                            <option>Loans</option>
+                            <option>Home Loans</option>
+                            <option>Mortgage</option>
+                            <option>Wealth Management</option>
+                        </select>
+                    </div>
+
                     <div class="mb-4">
                         <h6 class="mb-3"><i class="fas fa-bell me-1"></i>Subscribe to Notifications:</h6>
-                        
+
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="checkbox" id="subscribe_sms" name="subscribe_sms">
                             <label class="form-check-label" for="subscribe_sms">
                                 <i class="fas fa-sms me-1 text-primary"></i>SMS Notifications
                             </label>
                         </div>
-                        
+
                         <div class="form-check mb-2">
                             <input class="form-check-input" type="checkbox" id="subscribe_email" name="subscribe_email">
                             <label class="form-check-label" for="subscribe_email">
                                 <i class="fas fa-envelope me-1 text-warning"></i>Email Notifications
                             </label>
                         </div>
-                        
+
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="subscribe_voice" name="subscribe_voice">
                             <label class="form-check-label" for="subscribe_voice">
@@ -58,11 +93,12 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-success w-100 mb-3">
                         <i class="fas fa-user-plus me-2"></i>Register & Send OTP
                     </button>
                 </form>
+
                 
                 <div class="text-center">
                     <p class="mb-0">Already have an account? 
