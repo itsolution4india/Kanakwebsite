@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify OTP - Kanak Project{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header bg-warning text-white text-center py-4">
+                <h3><i class="fas fa-key me-2"></i>Verify OTP</h3>
+            </div>
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="fas fa-mobile-alt fa-3x text-warning mb-3"></i>
+                    <p class="text-muted">We've sent a 6-digit OTP to your registered mobile number</p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="otp" class="form-label">
+                            <i class="fas fa-lock me-1"></i>Enter OTP
+                        </label>
+                        <input type="text" class="form-control text-center" id="otp" name="otp" 
+                               pattern="[0-9]{6}" maxlength="6" 
+                               placeholder="000000" style="font-size: 1.5rem; letter-spacing: 0.5rem;" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning w-100 mb-3">
+                        <i class="fas fa-check me-2"></i>Verify OTP
+                    </button>
+                </form>
+                
+                <div class="text-center">
+                    <p class="text-muted small">Didn't receive OTP? 
+                        <a href="{% url 'login' %}" class="text-decoration-none">Resend</a>
+                    </p>
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-shield-alt me-1"></i>
+                    <strong>Security:</strong> OTP is valid for 10 minutes only.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-focus on OTP input and format
+document.getElementById('otp').addEventListener('input', function(e) {
+    this.value = this.value.replace(/\D/g, '');
+});
+</script>
+{% endblock %}
